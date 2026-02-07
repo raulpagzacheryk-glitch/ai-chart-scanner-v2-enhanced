@@ -1,0 +1,29 @@
+from fastapi import FastAPI  
+from fastapi.middleware.cors import CORSMiddleware  
+from databases import Database  
+
+# Initialize FastAPI application  
+app = FastAPI()  
+
+# Database setup  
+database = Database('sqlite:///./test.db')  
+
+@app.on_event('startup')  
+async def startup():  
+    await database.connect()  
+
+@app.on_event('shutdown')  
+async def shutdown():  
+    await database.disconnect()  
+
+# CORS middleware  app.add_middleware(  
+    CORSMiddleware,  
+    allow_origins=['*'],  
+    allow_credentials=True,  
+    allow_methods=['*'],  
+    allow_headers=['*']  
+)  
+
+# Include routes  
+# from . import your_routes  
+# app.include_router(your_routes.router)  
