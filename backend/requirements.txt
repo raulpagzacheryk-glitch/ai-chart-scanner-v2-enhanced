@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+psycopg2-binary
+langchain
+openai
+opencv-python
+numpy
+pandas
